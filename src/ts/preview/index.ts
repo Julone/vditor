@@ -142,7 +142,7 @@ export class Preview {
 
     public render(vditor: IVditor, value?: string) {
         clearTimeout(this.mdTimeoutId);
-
+.
         if (this.element.style.display === "none") {
             if (this.element.getAttribute("data-type") === "renderPerformance") {
                 vditor.tip.hide();
@@ -252,7 +252,7 @@ export class Preview {
         });
     }
 
-    private copyToX(vditor: IVditor, copyElement: HTMLElement, type = "mp-wechat") {
+    private copyToX(vditor: IVditor, copyElement: HTMLElement, type = "default") {
         // fix math render
         if (type !== "zhihu") {
             copyElement.querySelectorAll(".katex-html .base").forEach((item: HTMLElement) => {
@@ -275,6 +275,6 @@ export class Preview {
         setSelectionFocus(range);
         document.execCommand("copy");
         this.element.lastElementChild.remove();
-        vditor.tip.show(`已复制，可到${type === "zhihu" ? "知乎" : "微信公众号平台"}进行粘贴`);
+        vditor.tip.show(['zhihu', 'mp-wechat'].includes(type)? `已复制，可到${type === "zhihu" ? "知乎" : "微信公众号平台"}进行粘贴`: `已复制到剪切板`);
     }
 }
